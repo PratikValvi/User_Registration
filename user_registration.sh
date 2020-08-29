@@ -88,9 +88,48 @@ do
 			fi
 		fi
 	done
+
+#Get User's Mobile Number	
+	while $True
+	do
+		read -p "Enter Country Code: " usr_country_code
+		
+		#Mobile Number Pattern rules are
+		#example : 91 9900990099
+		#1) Mobile Number should be follwed by country code & space.
+		#2) Mobile Number should have exact 10 Digits.
+		usr_mobile_no_pattern1="[1-9]{1,2}"
+		usr_mobile_no_pattern2="[0-9]{10}"
+		
+		if [[ $usr_country_code =~ $usr_mobile_no_pattern1 ]]
+		then
+			read -p  "Enter Mobile Number: " usr_mobile_no
+			
+			if [[ $usr_mobile_no =~ $usr_mobile_no_pattern2 ]]
+			then
+				echo "Congratulations !!"
+				echo "Your Response is successfully Recorded"
+				break
+			else
+				echo "Mobile Number Should be 10 Digits"
+			fi
+
+		else
+			echo "Mobile Number not Valid !!"
+			echo "Country code can not be '00'"
+			read -p "Press Any Key to Continue or 'q' to Quit." usr_response
+			if [[ $usr_response == 'q' ]]
+			then
+				break
+			else
+				continue
+			fi
+		fi
+	done
 	echo ""
 	echo "Welcome!!!"$usr_fname $usr_lname
 	echo "Your Contact details are "
 	echo "Email: "$usr_email
+	echo "Mobile Number: "$usr_country_code $usr_mobile_no
 	break
 done
