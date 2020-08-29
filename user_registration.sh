@@ -5,6 +5,7 @@ echo "Welcome to User Registration"
 
 while $True
 do
+	echo ""
 #Get User's First Name
 	while $True
 	do
@@ -32,6 +33,7 @@ do
 			fi
 		fi
 	done
+	echo ""
 	
 #Get User's Last Name	
 	while $True
@@ -60,7 +62,8 @@ do
 			fi
 		fi
 	done
-
+	echo ""
+	
 #Get User's Email Address	
 	while $True
 	do
@@ -88,7 +91,8 @@ do
 			fi
 		fi
 	done
-
+	echo ""
+	
 #Get User's Mobile Number	
 	while $True
 	do
@@ -127,9 +131,70 @@ do
 		fi
 	done
 	echo ""
+	
+#Get User's Password
+	while $True
+	do
+		read -p "Enter Password: " usr_psw
+		
+		#Password Pattern rules are
+		#1) Mininum 8 Characters.
+		#2) At least 1 Character Upper Case.
+		#3) At least 1 Number.
+		#4) At least 1 Special Chracter ! @ # $ % & * ( ) - + = ^ . 
+		usr_psw_pattern1="^[a-zA-Z]{1,}.{7,10}"
+		usr_psw_pattern2="[A-Z]{1,}"
+		usr_psw_pattern3="[0-9]{1,}"
+		usr_psw_pattern4="[\!\@\#\$\%\&\*\(\)\-\+\=\^\.]{1,}"
+		if [[ $usr_psw =~ $usr_psw_pattern1 ]]
+		then
+			if [[ $usr_psw =~ $usr_psw_pattern2 ]]
+			then
+				if [[ $usr_psw =~ $usr_psw_pattern3 ]]
+				then
+					if [[ $usr_psw =~ $usr_psw_pattern4 ]]
+					then
+						echo "Congratulations!!!"
+						echo "Your Password is Valid."
+						break
+					else
+						echo "Password must have at least one Special Character"
+						echo "! @ # $ % & * ( ) - + = ^ . "
+						continue
+					fi
+				else
+					echo "Password must have at least one Numeric Digit."
+					continue
+				fi
+			else
+				echo "Password must have at least one Upper Case Alphabet."
+				continue
+			fi
+		else
+			echo "Password is not Valid !!"
+			echo "Password must start with a Alphabet & should have minimum 8 Characters."
+			read -p "Press Any Key to Continue or 'q' to Quit." usr_response
+			if [[ $usr_response == 'q' ]]
+			then
+				break
+			else
+				continue
+			fi
+		fi
+	done
+	echo ""
 	echo "Welcome!!!"$usr_fname $usr_lname
 	echo "Your Contact details are "
 	echo "Email: "$usr_email
 	echo "Mobile Number: "$usr_country_code $usr_mobile_no
-	break
+	echo "Thank You for Registration."
+	echo "Have a nice day!!!"
+	echo ""
+	read -p "Press Any Key to Register more or 'q' to Quit." usr_response
+	if [[ $usr_response == 'q' ]]
+	then
+		break
+	else
+		continue
+	fi
 done
