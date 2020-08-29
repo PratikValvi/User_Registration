@@ -60,7 +60,37 @@ do
 			fi
 		fi
 	done
+
+#Get User's Email Address	
+	while $True
+	do
+		read -p "Enter Email Address: " usr_email
+		
+		#Email ID Rules are
+		#example : abc.xyz@bl.co.in
+		#1) Email should have three mandatory parts (abc,bl & co)
+		#2) Email shiuld have two optional (xyz & in )with precise @ and . positions
+		usr_email_pattern="^[a-zA-Z]+[\.a-zA-Z0-9]*[\@][a-z]+(.com|.co.in)$"
+		
+		if [[ $usr_email =~ $usr_email_pattern ]]
+		then
+			echo "Congratulations !!"
+			echo "Your Response is successfully Recorded"
+			break
+		else
+			echo "Email ID not Valid !!"
+			read -p "Press Any Key to Continue or 'q' to Quit." usr_response
+			if [[ $usr_response == 'q' ]]
+			then
+				break
+			else
+				continue
+			fi
+		fi
+	done
 	echo ""
 	echo "Welcome!!!"$usr_fname $usr_lname
+	echo "Your Contact details are "
+	echo "Email: "$usr_email
 	break
 done
