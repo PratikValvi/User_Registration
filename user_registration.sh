@@ -32,7 +32,35 @@ do
 			fi
 		fi
 	done
+	
+#Get User's Last Name	
+	while $True
+	do
+		read -p "Enter Last Name: " usr_lname
+		
+		#Last Name Pattern rules are
+		#1) Last Name should start with single capital characters A-Z.
+		#2) Last Name should can contain minimum three characters.
+		usr_lname_pattern="^[A-Z]{1}[a-z]{2,}*$"
+		
+		if [[ $usr_lname =~ $usr_lname_pattern ]]
+		then
+			echo "Congratulations !!"
+			echo "Your Response is successfully Recorded"
+			break
+		else
+			echo "Last Name not Valid !!"
+			echo "Last Name should start with Upper Case Alphabet"
+			read -p "Press Any Key to Continue or 'q' to Quit." usr_response
+			if [[ $usr_response == 'q' ]]
+			then
+				break
+			else
+				continue
+			fi
+		fi
+	done
 	echo ""
-	echo "Welcome!!!"$usr_fname
+	echo "Welcome!!!"$usr_fname $usr_lname
 	break
 done
